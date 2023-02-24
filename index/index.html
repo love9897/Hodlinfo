@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+<header><h1>HODLINFO</h1><h4>.com</h4>
+  <h5>Powered By<span class="fin">Finstreet</span> </h5>  
+  <select  class="box1" >
+    <option value="1">INR</option>
+   
+</select>
+<select  class="box2" >
+  <option value="1">BTC</option>
+  <option value="2">XRP</option>
+  <option value="3">ETH</option>
+</select>
+
+<button class="telegram"><i class="fa fa-telegram"></i> Connect Telegram</button>
+<label class="switch">
+  <input type="checkbox" checked>
+  <span class="slider round"></span>
+</label>
+</header>
+<div class="body">
+  <table class="content-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>name</th>
+        <th>Last</th>
+        <th>Buy / Sell Price</th>
+        <th>volume</th>
+        <th>base_unit</th>
+      </tr>
+    </thead>
+    <tbody id="users">
+    
+
+    </tbody>
+  </table>
+
+  <script>
+    fetch('/users')
+      .then(response => response.json())
+      .then(users => {
+        const tableBody = document.getElementById('users');
+        users.forEach(user => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td class="roundleft"><h4>${user.id}</h4></td>
+            <td><h4>${user.name}</h4></td>
+            <td><h4>₹ ${user.last}</h4></td>
+            <td><h4>₹ ${user.buy} / ₹ ${user.sell}</h4></td>
+           <td><h4>${user.volume}</h4></td>
+            <td class="roundright"><h4>${user.baseunit}</h4></td>
+          `;
+          tableBody.appendChild(row);
+        });
+      })
+      .catch(error => console.error(error));
+  </script>
+</div>
+<footer></footer>
+
+</div>
+
+
+
+
+
+</body>
+</html>
+
